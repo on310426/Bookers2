@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto text-danger">
+      <% if @newbook.errors.any? %>
+        <%= @newbook.errors.count %>errors prohibited this obj from being saved:
+        <%= @newbook.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= attachment_image_tag @user, :profile_image, :fill,50,50, fallback:"no_image.jpg" %>
+      <table class="table table-striped">
+        <tr>
+          <th>name</th>
+          <th><%= @user.name %></th>
+        </tr>
+        <tr>
+          <th>Introduction</th>
+          <th><%= @user.introduction %></th>
+        </tr>
+      </table>
+        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      <h2>New book</h2>
+        <%= form_with model:@newbook, local:true do |f| %>
+          <label>Title</label><br>
+          <%= f.text_field :title %><br>
+          <label>Opinion</label><br>
+          <%= f.text_area :body %><br>
+          
+          <%= f.submit 'Create Book' %>
+        <% end %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Opinion</th>
+            </tr>
+          </thead>
+          <% @books.each do |book| %>
+            <tbody>
+              <tr>
+                <th>
+                  <%= link_to user_path(book.user) do %>
+                  <%= attachment_image_tag book.user, :profile_image, :fill,100,100, fallback:"no_image.jpg" %>
+                  <% end %>
+                  </th>
+                <th><%= link_to book.title, book_path(book) %></th>
+                <th><%= book.body %></th>
+                <th></th>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+    </div>
+  </div>
+</div>
