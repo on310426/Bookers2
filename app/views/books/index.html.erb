@@ -13,8 +13,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      
+    <div class="col-md-3 p-3">
       <h2>User info</h2>
       <%= attachment_image_tag @user, :profile_image, :fill,50,50, fallback:"no_image.jpg" %>
       <table class="table table-striped">
@@ -37,11 +36,11 @@
         <label>Opinion</label><br>
         <%= f.text_area :body %><br>
         
-        <%= f.submit 'Create Book' %>
+        <%= f.submit 'Create Book', class: "btn btn-primary" %>
       <% end %>
     </div>
     
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-8 offset-md-1 p-3">
       <h2>Books</h2>
       <table class="table table-striped">
         <thead>
@@ -61,6 +60,20 @@
               </th>
               <th><%= link_to book.title, book_path(book) %></th>
               <th><%= book.body %></th>
+              <th>
+                <% if book.favorited_by?(current_user) %>
+                  <%= link_to book_favorites_path(book), method: :delete, class: "text-danger" do %>
+                    <i class="fas fa-heart"></i><%= book.favorites.count %>
+                  <% end %>
+                  <% else %>
+                  <%= link_to book_favorites_path(book), method: :post, class: "text-primary" do %>
+                    <i class="fas fa-heart"></i><%= book.favorites.count %>
+                  <% end %>
+                <% end %>
+              </th>
+              <th>
+                <p>コメント数：<%= book.book_comments.count %></p>
+              </th>
             </tr>
           </tbody>
         <% end %>

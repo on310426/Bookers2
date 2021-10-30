@@ -24,6 +24,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto text-muted">
+            
             <% if user_signed_in? %>
               <li class="nav-item p-3">
                 <%= link_to user_path(current_user.id) do %>
@@ -42,9 +43,10 @@
               </li>
               <li class="nav-item  p-3">
                 <%= link_to destroy_user_session_path, method: :delete do %>
-                  <strong class="text-white"><i class="fas fa-sign-out-alt"></i>Log out</strong>
+                  <strong class="text-white"><i class="fas fa-sign-out-alt"></i>log out</strong>
                 <% end %>
               </li>
+              
             <% else %>
               <li class="nav-item  p-3">
                 <%= link_to root_path do %>
@@ -58,15 +60,16 @@
               </li>
               <li class="nav-item  p-3">
                 <%= link_to new_user_registration_path do %>
-                  <strong class="text-white"><i class="fas fa-user-plus"></i>Sign up</strong>
+                  <strong class="text-white"><i class="fas fa-user-plus"></i>sign up</strong>
                 <% end %>
               </li>
               <li class="nav-item  p-3">
                 <%= link_to new_user_session_path do %>
-                  <strong class="text-white"><i class="fas fa-sign-in-alt"></i>Log in</strong>
+                  <strong class="text-white"><i class="fas fa-sign-in-alt"></i>log in</strong>
                 <% end %>
               </li>
             <% end %>
+            
           </ul>
         </div>
     </nav>
